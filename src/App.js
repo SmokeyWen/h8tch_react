@@ -6,6 +6,7 @@ import Add from './components/Add';
 import ItemList from './components/ItemList';
 import Search from './components/Search';
 const {serverUrl} = require('./constants');
+const moment = require('moment');
 
 
 const App = () => {
@@ -29,6 +30,24 @@ const App = () => {
         }
     }
 
+    const addTask = async (newTask, setNewTask) => {
+        if (newTask !== ''){
+            console.log('new task name:', newTask);
+            const obj = {
+                name : newTask,
+                date : moment().format('L'),
+                is_done : 0
+            };
+
+            const response = await axios.post(serverUrl + 'add', obj);
+            setTasks(response.body);
+            document.getElementById('task-input').value = '';
+            
+            // callback func resets states in add component
+            setNewTask('');
+        }
+    }
+
     return (
         <div className="container">
             <div className="row">
@@ -38,7 +57,7 @@ const App = () => {
             </div>
             <div className="row">
                 <div className='col-md'>
-                    <Add />
+                    <Add onClick = {addTask}/>
                 </div>
                 <div className='col-md'>
                     <Search />
