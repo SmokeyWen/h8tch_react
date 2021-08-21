@@ -4,15 +4,35 @@ import Add from './components/Add';
 import ItemList from './components/ItemList';
 import Search from './components/Search';
 
+import './styles/App.css';
+
 
 const App = () => {
     return (
-        <div>
-            <h1>Hello from React!</h1>
-            <Header />
-            <Add />
-            <ItemList />
-            <Search />
+        <div className="container">
+            <div className="row">
+                <div className="col-lg">
+                    <Header />
+                </div>
+            </div>
+            <div className="row">
+                <div className='col-md'>
+                    <Add />
+                </div>
+                <div className='col-md'>
+                    <Search />
+                </div>
+            </div>
+            
+            <div className="row">
+                <div className='col-lg'>
+                    <ItemList />
+                </div>
+                <div className='col-lg'>
+                    <ItemList />
+                </div>
+            </div>
+
         </div>
     )
 }

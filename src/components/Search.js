@@ -2,8 +2,9 @@ import React from 'react'
 
 const Search = () => {
     return (
-        <div>
-            <h3>This is Search component</h3>
+        <div id="search-area">
+            {/* <h3>This is Search component</h3> */}
+            <input id="search-input" className="form-control" placeholder="Search" />
         </div>
     )
 }
