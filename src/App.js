@@ -56,12 +56,17 @@ const App = () => {
     }
 
     const deleteTask = async (id ,name) => {
-        const confirm = window.confirm("Are you sure to delete task" + name + "?");
+        const confirm = window.confirm("Are you sure to delete task " + name + "?");
         if (confirm){
             const response = await axios.delete(serverUrl + 'del?id=' + id);
             console.log('deleted?', response);
             setTasks(response.data);
         }
+    }
+
+    const changeStatus = async (id) => {
+        const response = await axios.put(serverUrl + 'upd?id=' + id);
+        setTasks(response.data);
     }
 
     // {console.log('-----list all tasks', tasks)}
@@ -84,10 +89,10 @@ const App = () => {
             
             <div className="row">
                 <div className='col-lg'>
-                    <ItemList title = {'To Do'} tasks = {tasks} keyWord = {keyWord} isDone = '0' onDelete = {deleteTask}/>
+                    <ItemList title = {'To Do'} tasks = {tasks} keyWord = {keyWord} isDone = '0' onDelete = {deleteTask} changeStatus = {changeStatus}/>
                 </div>
                 <div className='col-lg'>
-                    <ItemList title = {'Done'} tasks = {tasks} keyWord = {keyWord} isDone = '1' onDelete = {deleteTask}/>
+                    <ItemList title = {'Done'} tasks = {tasks} keyWord = {keyWord} isDone = '1' onDelete = {deleteTask} changeStatus = {changeStatus}/>
                 </div>
             </div>
 
