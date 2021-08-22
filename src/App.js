@@ -33,20 +33,27 @@ const App = () => {
 
     const addTask = async (newTask, setNewTask) => {
         if (newTask !== ''){
-            console.log('new task name:', newTask);
-            const obj = {
-                name : newTask,
-                date : moment().format('L'),
-                is_done : 0,
-            };
-
-            const response = await axios.post(serverUrl + 'add', obj);
-            setTasks(response.data);
-            console.log('response after add', response.body);
-            document.getElementById('task-input').value = '';
-            
-            // callback func resets states in add component
-            setNewTask('');
+            const isFound = tasks.find((task) => task.name === newTask);
+            console.log('isFound:', isFound);
+            if (isFound === undefined) {
+                console.log('new task name:', newTask);
+                const obj = {
+                    name : newTask,
+                    date : moment().format('L'),
+                    is_done : 0,
+                };
+    
+                const response = await axios.post(serverUrl + 'add', obj);
+                setTasks(response.data);
+                console.log('response after add', response.body);
+                document.getElementById('task-input').value = '';
+                
+                // callback func resets states in add component
+                setNewTask('');
+            }
+            else {
+                alert( `Task ${newTask} exists.`);
+            }
         }
     }
 
