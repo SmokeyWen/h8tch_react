@@ -1,10 +1,11 @@
 import React from 'react'
 
-const Header = () => {
+const Header = (props) => {
     return (
-        <div>
-            <h3>This is Header component</h3>
-        </div>
+        <header>
+            <h1 id="title" >Marvelous v2.0</h1>
+            <a href="" id="delete-all" onClick = {props.onDelete}>Delete All Tasks</a>
+        </header>
     )
 }
 
