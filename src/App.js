@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Add from './components/Add';
 import ItemList from './components/ItemList';
 import Search from './components/Search';
+import Spinner from 'react-bootstrap/Spinner';
 const {serverUrl} = require('./constants');
 const moment = require('moment');
 
@@ -12,12 +13,15 @@ const moment = require('moment');
 const App = () => {
     const [tasks, setTasks] = useState([]);
     const [keyWord, setKeyWord] = useState('');
+    const [isLoaded, setIsLoaded] = useState(false);
 
     // Load tasks from express when load
     useEffect(() => {
         const getTasks = async () => {
+            setIsLoaded(false);
             const response = await axios.get(serverUrl + 'get');
             setTasks(response.data);
+            setIsLoaded(true);
         }
         getTasks();
     }, [])
@@ -99,11 +103,22 @@ const App = () => {
             </div>
             
             <div className="row">
-                <div className='col-lg'>
-                    <ItemList title = {'To Do'} tasks = {tasks} keyWord = {keyWord} isDone = '0' onDelete = {deleteTask} changeStatus = {changeStatus}/>
+                <div className='col-lg task-list'>
+                    { isLoaded === false &&
+                        <Spinner animation="border" variant="primary" className = "spinner"/>
+                    }
+                    { isLoaded === true &&
+                        <ItemList title = {'To Do'} tasks = {tasks} keyWord = {keyWord} isDone = '0' onDelete = {deleteTask} changeStatus = {changeStatus}/>
+                    }
+                    
                 </div>
-                <div className='col-lg'>
-                    <ItemList title = {'Done'} tasks = {tasks} keyWord = {keyWord} isDone = '1' onDelete = {deleteTask} changeStatus = {changeStatus}/>
+                <div className='col-lg task-list'>
+                    { isLoaded === false &&
+                        <Spinner animation="border" variant="primary" className = "spinner"/>
+                    }
+                    { isLoaded === true &&
+                        <ItemList title = {'Done'} tasks = {tasks} keyWord = {keyWord} isDone = '1' onDelete = {deleteTask} changeStatus = {changeStatus}/>
+                    }
                 </div>
             </div>
 
