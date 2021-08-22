@@ -1,5 +1,5 @@
 Frontend for Todo app built with React  
-You can also visit: https://h8tch-react.netlify.app/ to see live demo  
+You can also visit: https://h8tch-react.netlify.app/ to see live demo. Please give it a few seconds when you open it the first time as the server might be idling.  
 
 To install, `npm install`  
 To run, `npm start`  
