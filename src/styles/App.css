@@ -66,6 +66,9 @@
 }
 
 .check {
-    margin-right : 10px;
+    margin-right : 15px;
+    width: 17px;
+    height: 17px;
+    vertical-align:middle;
 }
 
