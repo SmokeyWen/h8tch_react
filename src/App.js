@@ -82,7 +82,7 @@ const App = () => {
     }
 
     return (
-        <div className="container">
+        <div className="container task-body">
             
             <div className="row">
                 <div className="col-lg">
