@@ -17,7 +17,6 @@ const App = () => {
     useEffect(() => {
         const getTasks = async () => {
             const response = await axios.get(serverUrl + 'get');
-            console.log('get all data', response.data);
             setTasks(response.data);
         }
         getTasks();
@@ -29,6 +28,7 @@ const App = () => {
         const confirm = window.confirm('Are you sure to delete all tasks?');
         if (confirm){
             const response = await axios.get(serverUrl + 'del/all');
+            setTasks(response.data);
         }
     }
 
@@ -48,7 +48,6 @@ const App = () => {
     
                 const response = await axios.post(serverUrl + 'add', obj);
                 setTasks(response.data);
-                console.log('response after add', response.body);
                 document.getElementById('task-input').value = '';
                 
                 // callback func resets states in add component
