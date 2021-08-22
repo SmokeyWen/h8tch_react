@@ -11,11 +11,12 @@ const moment = require('moment');
 
 const App = () => {
     const [tasks, setTasks] = useState([]);
+    const [keyWord, setKeyWord] = useState('');
 
     useEffect(() => {
         const getTasks = async () => {
             const response = await axios.get(serverUrl + 'get');
-            // console.log('get all data', response.data);
+            console.log('get all data', response.data);
             setTasks(response.data);
         }
         getTasks();
@@ -26,7 +27,11 @@ const App = () => {
         const confirm = window.confirm('Are you sure to delete all tasks?');
         if (confirm){
             const response = await axios.delete(serverUrl + 'del');
+            
+            // setTimeout(function(){  }, 1000);
             setTasks(response.data);
+            console.log('tasks after delete all', tasks);
+            console.log('delete all response', response.data);
         }
     }
 
@@ -36,11 +41,12 @@ const App = () => {
             const obj = {
                 name : newTask,
                 date : moment().format('L'),
-                is_done : 0
+                is_done : 0,
             };
 
             const response = await axios.post(serverUrl + 'add', obj);
             setTasks(response.body);
+            console.log('response after add', response.body);
             document.getElementById('task-input').value = '';
             
             // callback func resets states in add component
@@ -48,11 +54,18 @@ const App = () => {
         }
     }
 
+    const searchTask = (e) => {
+        console.log('key word:', e.target.value);
+        setKeyWord(e.target.value);
+    }
+
+    {console.log('-----list all tasks', tasks)}
     return (
         <div className="container">
+            
             <div className="row">
                 <div className="col-lg">
-                    <Header onClick = {deleteAll} />
+                    <Header onDelete = {deleteAll} />
                 </div>
             </div>
             <div className="row">
@@ -60,16 +73,16 @@ const App = () => {
                     <Add onClick = {addTask}/>
                 </div>
                 <div className='col-md'>
-                    <Search />
+                    <Search onChange = {searchTask}/>
                 </div>
             </div>
             
             <div className="row">
                 <div className='col-lg'>
-                    <ItemList />
+                    <ItemList title = {'To Do'} tasks = {tasks} keyWord = {keyWord} isDone = '0'/>
                 </div>
                 <div className='col-lg'>
-                    <ItemList />
+                    <ItemList title = {'Done'} tasks = {tasks} keyWord = {keyWord} isDone = '1'/>
                 </div>
             </div>
 

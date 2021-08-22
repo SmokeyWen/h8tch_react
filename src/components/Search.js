@@ -1,10 +1,9 @@
 import React from 'react'
 
-const Search = () => {
+const Search = (props) => {
     return (
         <div id="search-area">
-            {/* <h3>This is Search component</h3> */}
-            <input id="search-input" className="form-control" placeholder="Search" />
+            <input id="search-input" className="form-control" placeholder="Search" onChange = {(e) => props.onChange(e)} />
         </div>
     )
 }
