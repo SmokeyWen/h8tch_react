@@ -26,12 +26,8 @@ const App = () => {
         console.log('deleting all tasks');
         const confirm = window.confirm('Are you sure to delete all tasks?');
         if (confirm){
-            const response = await axios.delete(serverUrl + 'del');
+            const response = await axios.get(serverUrl + 'del/all');
             
-            // setTimeout(function(){  }, 1000);
-            setTasks(response.data);
-            console.log('tasks after delete all', tasks);
-            console.log('delete all response', response.data);
         }
     }
 
@@ -45,7 +41,7 @@ const App = () => {
             };
 
             const response = await axios.post(serverUrl + 'add', obj);
-            setTasks(response.body);
+            setTasks(response.data);
             console.log('response after add', response.body);
             document.getElementById('task-input').value = '';
             
@@ -59,7 +55,16 @@ const App = () => {
         setKeyWord(e.target.value);
     }
 
-    {console.log('-----list all tasks', tasks)}
+    const deleteTask = async (id ,name) => {
+        const confirm = window.confirm("Are you sure to delete task" + name + "?");
+        if (confirm){
+            const response = await axios.delete(serverUrl + 'del?id=' + id);
+            console.log('deleted?', response);
+            setTasks(response.data);
+        }
+    }
+
+    // {console.log('-----list all tasks', tasks)}
     return (
         <div className="container">
             
@@ -79,10 +84,10 @@ const App = () => {
             
             <div className="row">
                 <div className='col-lg'>
-                    <ItemList title = {'To Do'} tasks = {tasks} keyWord = {keyWord} isDone = '0'/>
+                    <ItemList title = {'To Do'} tasks = {tasks} keyWord = {keyWord} isDone = '0' onDelete = {deleteTask}/>
                 </div>
                 <div className='col-lg'>
-                    <ItemList title = {'Done'} tasks = {tasks} keyWord = {keyWord} isDone = '1'/>
+                    <ItemList title = {'Done'} tasks = {tasks} keyWord = {keyWord} isDone = '1' onDelete = {deleteTask}/>
                 </div>
             </div>
 

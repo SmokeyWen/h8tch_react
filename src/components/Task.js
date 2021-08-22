@@ -7,7 +7,7 @@ const Task = (props) => {
             {/* {console.log('single task', task)} */}
             <input type="checkbox" className="check" />
             <span className="task-info">{task.name} on {task.date} 
-                <button type="button" className="close" aria-label="Close">
+                <button type="button" className="close" aria-label="Close" onClick = {() => props.onDelete(task._id, task.name)}>
                     <span aria-hidden="true">&times;</span>
                 </button>
             </span>
