@@ -8,6 +8,7 @@ To unit test, `npm test`
   
   
 Extra features:
+- Spinner icon when loading data  
 - Deletion for individual task
 - Confirmation pop-up for both individual deletion and deletion for all tasks
 - Date created on each task
