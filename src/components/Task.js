@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 
 const Task = (props) => {
+    // eslint-disable-next-line
     const [task, setTask] = useState(props.data);
     return (
         <div className="single-task">
