@@ -13,6 +13,7 @@ const App = () => {
     const [tasks, setTasks] = useState([]);
     const [keyWord, setKeyWord] = useState('');
 
+    // Load tasks from express when load
     useEffect(() => {
         const getTasks = async () => {
             const response = await axios.get(serverUrl + 'get');
@@ -22,17 +23,19 @@ const App = () => {
         getTasks();
     }, [])
 
+    // function to delete all tasks
     const deleteAll = async () => {
         console.log('deleting all tasks');
         const confirm = window.confirm('Are you sure to delete all tasks?');
         if (confirm){
             const response = await axios.get(serverUrl + 'del/all');
-            
         }
     }
 
+    // function to add a new task
     const addTask = async (newTask, setNewTask) => {
         if (newTask !== ''){
+            // check if duplicate task exists
             const isFound = tasks.find((task) => task.name === newTask);
             console.log('isFound:', isFound);
             if (isFound === undefined) {
@@ -57,11 +60,13 @@ const App = () => {
         }
     }
 
+    // function to tasks in state
     const searchTask = (e) => {
         console.log('key word:', e.target.value);
         setKeyWord(e.target.value);
     }
 
+    // function to delete a specific task
     const deleteTask = async (id ,name) => {
         const confirm = window.confirm("Are you sure to delete task " + name + "?");
         if (confirm){
@@ -71,12 +76,12 @@ const App = () => {
         }
     }
 
+    // function to change is_done field of a task
     const changeStatus = async (id) => {
         const response = await axios.put(serverUrl + 'upd?id=' + id);
         setTasks(response.data);
     }
 
-    // {console.log('-----list all tasks', tasks)}
     return (
         <div className="container">
             

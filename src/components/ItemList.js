@@ -16,9 +16,6 @@ const ItemList = (props) => {
 
     return (
         <div id="list-view">
-            {/* <h3>This is ItemList component</h3> */}
-            {/* {console.log("props.keyWord", props.keyWord, typeof props.keyWord)} */}
-            {/* {console.log('all tasks', props.tasks)} */}
             <h3 id="list-title">{props.title}</h3>
             <hr />
             <ul id="list">
