@@ -33,6 +33,7 @@
     background-color : #cfe2f3;
     color : black;
     border-color : black;
+    width: 15%;
 }
 
 #search-area {
@@ -69,3 +70,15 @@
     vertical-align:middle;
 }
 
+.spinner{
+    margin: auto;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+}
+
+.task-list {
+    min-height: 100px;
+}
