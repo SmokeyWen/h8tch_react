@@ -13,4 +13,4 @@ Extra features:
 - Confirmation pop-up for both individual deletion and deletion for all tasks
 - Date created on each task
 - Duplicate check when adding a task
-- Search tasks that contain the input in search input box
+- Search tasks with names that contain the input in search box
